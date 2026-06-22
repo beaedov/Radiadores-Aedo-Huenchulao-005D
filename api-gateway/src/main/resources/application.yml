@@ -1,0 +1,175 @@
+server:
+  port: 9090
+
+jwt:
+  secret: ClaveSecretaSeguraParaRadiadoresDelPuerto2026QueDebeSerMuyLarga123456789
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins: "http://localhost:9090"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders: "*"
+          routes:
+            # ===== RUTAS DE DOCUMENTACIÓN (Swagger)=====
+            - id: cliente-docs
+              uri: http://localhost:8083
+              predicates:
+                - Path=/api/v1/clientes/v3/api-docs
+
+            - id: catalogo-docs
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/v1/radiadores/v3/api-docs
+
+            - id: cotizacion-docs
+              uri: http://localhost:8084
+              predicates:
+                - Path=/api/v1/cotizaciones/v3/api-docs
+
+            - id: mecanico-docs
+              uri: http://localhost:8087
+              predicates:
+                - Path=/api/v1/mecanicos/v3/api-docs
+
+            - id: pago-docs
+              uri: http://localhost:8088
+              predicates:
+                - Path=/api/v1/pagos/v3/api-docs
+
+            - id: repuesto-docs
+              uri: http://localhost:8089
+              predicates:
+                - Path=/api/v1/repuestos/v3/api-docs
+
+            - id: vehiculo-docs
+              uri: http://localhost:8086
+              predicates:
+                - Path=/api/v1/vehiculos/v3/api-docs
+
+            - id: orden-docs
+              uri: http://localhost:8085
+              predicates:
+                - Path=/api/v1/ordenes/v3/api-docs
+
+            - id: factura-docs
+              uri: http://localhost:8090
+              predicates:
+                - Path=/api/v1/facturas/v3/api-docs
+
+            - id: agenda-docs
+              uri: http://localhost:8091
+              predicates:
+                - Path=/api/v1/citas/v3/api-docs
+
+            # ===== RUTAS DE DATOS (con AuthenticationFilter) =====
+            - id: auth-service
+              uri: http://localhost:8092
+              predicates:
+                - Path=/auth/**
+
+            - id: service-cliente
+              uri: http://localhost:8083
+              predicates:
+                - Path=/api/v1/clientes/**,/api/v1/resenias/**
+              filters:
+                - AuthenticationFilter
+
+            - id: service-vehiculo
+              uri: http://localhost:8086
+              predicates:
+                - Path=/api/v1/vehiculos/**,/api/v1/tiposvehiculos/**
+              filters:
+                - AuthenticationFilter
+
+            - id: service-catalogo
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/v1/radiadores/**,/api/v1/categorias/**,/api/v1/compatibilidades/**
+              filters:
+                - AuthenticationFilter
+
+            - id: service-cotizacion
+              uri: http://localhost:8084
+              predicates:
+                - Path=/api/v1/cotizaciones/**,/api/v1/solicitudes/**
+              filters:
+                - AuthenticationFilter
+
+            - id: service-orden-reparacion
+              uri: http://localhost:8085
+              predicates:
+                - Path=/api/v1/ordenes/**,/api/v1/garantias/**,/api/v1/estados/**
+              filters:
+                - AuthenticationFilter
+
+            - id: service-mecanico
+              uri: http://localhost:8087
+              predicates:
+                - Path=/api/v1/mecanicos/**,/api/v1/especialidades/**
+              filters:
+                - AuthenticationFilter
+
+            - id: service-pago
+              uri: http://localhost:8088
+              predicates:
+                - Path=/api/v1/pagos/**,/api/v1/metodospago/**
+              filters:
+                - AuthenticationFilter
+
+            - id: service-repuesto
+              uri: http://localhost:8089
+              predicates:
+                - Path=/api/v1/repuestos/**,/api/v1/categoriarepuestos/**
+              filters:
+                - AuthenticationFilter
+
+            - id: service-factura
+              uri: http://localhost:8090
+              predicates:
+                - Path=/api/v1/facturas/**,/api/v1/detalles-factura/**
+              filters:
+                - AuthenticationFilter
+
+            - id: service-agenda
+              uri: http://localhost:8091
+              predicates:
+                - Path=/api/v1/citas/**,/api/v1/tipos-cita/**
+              filters:
+                - AuthenticationFilter
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: Servicio Cliente
+        url: /api/v1/clientes/v3/api-docs
+      - name: Servicio Catálogo
+        url: /api/v1/radiadores/v3/api-docs
+      - name: Servicio Cotización
+        url: /api/v1/cotizaciones/v3/api-docs
+      - name: Servicio Mecánico
+        url: /api/v1/mecanicos/v3/api-docs
+      - name: Servicio Pago
+        url: /api/v1/pagos/v3/api-docs
+      - name: Servicio Repuesto
+        url: /api/v1/repuestos/v3/api-docs
+      - name: Servicio Vehículo
+        url: /api/v1/vehiculos/v3/api-docs
+      - name: Servicio Orden de Reparación
+        url: /api/v1/ordenes/v3/api-docs
+      - name: Servicio Factura
+        url: /api/v1/facturas/v3/api-docs
+      - name: Servicio Agenda
+        url: /api/v1/citas/v3/api-docs

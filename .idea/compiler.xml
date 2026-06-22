@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
+      </profile>
+      <profile name="Annotation profile for service-auth" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+        </processorPath>
+        <module name="service-auth" />
+      </profile>
+      <profile name="Annotation profile for service-vehiculo" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+        </processorPath>
+        <module name="service-vehiculo" />
+        <module name="service-repuesto" />
+        <module name="service-pago" />
+        <module name="service-cliente" />
+        <module name="service-catalogo" />
+        <module name="service-cotizacion" />
+        <module name="service-orden-reparacion" />
+        <module name="service-mecanico" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
+      <module name="service-auth" options="-parameters" />
+      <module name="service-catalogo" options="-parameters" />
+      <module name="service-cliente" options="-parameters" />
+      <module name="service-cotizacion" options="-parameters" />
+      <module name="service-mecanico" options="-parameters" />
+      <module name="service-orden-reparacion" options="-parameters" />
+      <module name="service-pago" options="-parameters" />
+      <module name="service-repuesto" options="-parameters" />
+      <module name="service-vehiculo" options="-parameters" />
+    </option>
+  </component>
+</project>
